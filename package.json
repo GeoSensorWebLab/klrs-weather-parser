@@ -7,5 +7,9 @@
   "repository": {},
   "private": true,
   "author": "James Badger <jpbadger@ucalgary.ca>",
-  "license": "Reserved"
+  "license": "Reserved",
+  "dependencies": {
+    "csv-parse": "0.0.6",
+    "moment": "^2.8.3"
+  }
 }
