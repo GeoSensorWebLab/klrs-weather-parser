@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+$:.push('lib')
+
+require 'data_service'
+require 'json'
+require 'klrs_parser'
+
+# Read file args in order
+while !ARGV.empty? do
+  ARGF.set_encoding('windows-1252:utf-8', {
+    universal_newline: true
+  })
+  parsed = KLRSParser::CSVParser.new(ARGF.file)
+
+  # Output a datastream JSON for each column
+  parsed.columns[1..-1].each do |column|
+    ds = DataService::Datastream.new(column.name, column.units, column.name, stats: column.stats)
+    File.open("datastream-#{column.name}.json", 'w') do |f|
+      f.write JSON.pretty_generate(ds.to_hash)
+    end
+  end
+
+  # Output a JSON array of records for each column
+  parsed.columns[1..-1].each do |column|
+    records = column.data.map do |time_value|
+      DataService::Record.new(time_value.time, time_value.value)
+    end
+
+    File.open("datastream-#{column.name}-records.json", 'w') do |f|
+      f.write JSON.pretty_generate(records.map(&:to_hash))
+    end
+  end
+
+  ARGF.close
+end

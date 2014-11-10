@@ -1,5 +1,7 @@
 module KLRSParser
   class Column
+    require 'csv'
+
     attr_accessor :name, :units, :stats
     attr_reader :data
 
