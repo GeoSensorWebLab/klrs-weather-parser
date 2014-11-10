@@ -14,7 +14,16 @@ while !ARGV.empty? do
 
   puts "File: #{ARGF.filename}"
   puts "Columns: #{parsed.columns.count}"
-  puts "Readings: #{parsed.columns[0].data.count}"
+
+  parsed.columns.each_with_index do |column, i|
+    puts "\tColumn #{i+1}: #{column.name}"
+    puts "\t\tunits: #{column.units}"
+    puts "\t\tstats: #{column.stats}"
+    puts "\t\treadings: #{column.data.count}"
+    if column.data[0]
+      puts "\t\tExample: #{column.data[0].time} #{column.data[0].value}"
+    end
+  end
 
   ARGF.close
 end

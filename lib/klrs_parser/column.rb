@@ -70,7 +70,7 @@ module KLRSParser
     def parse_readings(readings)
       timestamp = readings.shift
       readings.each_with_index do |reading, i|
-        column = @columns.at(i)
+        column = @columns.at(i+1)
         column << TimeValue.new(timestamp, reading) if column
       end
     end
