@@ -1,0 +1,11 @@
+{
+  "name": "klrs-data-converter",
+  "version": "1.0.0",
+  "description": "Data converter for KLRS Weather Station data",
+  "main": "",
+  "scripts": {},
+  "repository": {},
+  "private": true,
+  "author": "James Badger <jpbadger@ucalgary.ca>",
+  "license": "Reserved"
+}
