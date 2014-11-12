@@ -14,7 +14,13 @@ module DataService
     end
 
     def parse_date(date)
-      DateTime.strptime(date, '%Y-%m-%d %H:%M')
+      if date ~= /\d+-\d+-\d+ \d{2}:\d{2}(\-|\+)\d+(:\d+)?(:\d+)?+/
+        DateTime.strptime(date, '%Y-%m-%d %H:%M%z')
+      elsif date ~= /\d+-\d+-\d+ \d{2}:\d{2}:\d{2}(\-|\+)\d+(:\d+)?(:\d+)?+/
+        DateTime.strptime(date, '%Y-%m-%d %H:%M:%S%z')
+      else
+        raise "Unknown date format"
+      end
     end
 
     def to_hash
