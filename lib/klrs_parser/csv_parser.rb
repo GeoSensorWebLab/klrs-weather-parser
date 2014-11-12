@@ -2,7 +2,14 @@ module KLRSParser
   class CSVParser
     attr_reader :columns
 
-    def initialize(file)
+    # Create a new CSV parser for File (IO Class). Options:
+    #
+    # * timezone (string): An offset to assume for the input data. Example is
+    #                      "-07:00". Default is "+00:00" (UTC).
+    #
+    def initialize(file, options = {})
+      @timezone = options[:timezone] || "+00:00"
+
       @columns = []
       @delimiter = find_delimiter(file.gets)
       parse_columns(file.gets)
@@ -11,6 +18,7 @@ module KLRSParser
       parse_data(file)
     end
 
+    # If there is more than one tab character in the line, it probably is TSV.
     def find_delimiter(line)
       if line.count("\t") > 1
         "\t"
@@ -53,6 +61,7 @@ module KLRSParser
 
     def parse_readings(readings)
       timestamp = readings.shift
+      timestamp += @timezone
       readings.each_with_index do |reading, i|
         column = @columns.at(i+1)
         column << TimeValue.new(timestamp, reading) if column

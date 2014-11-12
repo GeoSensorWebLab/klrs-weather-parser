@@ -11,7 +11,7 @@ while !ARGV.empty? do
   ARGF.set_encoding('windows-1252:utf-8', {
     universal_newline: true
   })
-  parsed = KLRSParser::CSVParser.new(ARGF.file)
+  parsed = KLRSParser::CSVParser.new(ARGF.file, timezone: "-07:00")
 
   # Output a datastream JSON for each column
   parsed.columns[1..-1].each do |column|

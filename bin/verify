@@ -10,7 +10,7 @@ while !ARGV.empty? do
   ARGF.set_encoding('windows-1252:utf-8', {
     universal_newline: true
   })
-  parsed = KLRSParser::CSVParser.new(ARGF.file)
+  parsed = KLRSParser::CSVParser.new(ARGF.file, timezone: "-07:00")
 
   puts "File: #{ARGF.filename}"
   puts "Columns: #{parsed.columns.count}"
