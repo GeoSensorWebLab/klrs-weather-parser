@@ -14,12 +14,12 @@ module DataService
     end
 
     def parse_date(date)
-      if date ~= /\d+-\d+-\d+ \d{2}:\d{2}(\-|\+)\d+(:\d+)?(:\d+)?+/
+      if date =~ /\d+-\d+-\d+ \d{1,2}:\d{2}(\-|\+)\d+(:\d+)?(:\d+)?+/
         DateTime.strptime(date, '%Y-%m-%d %H:%M%z')
-      elsif date ~= /\d+-\d+-\d+ \d{2}:\d{2}:\d{2}(\-|\+)\d+(:\d+)?(:\d+)?+/
+      elsif date =~ /\d+-\d+-\d+ \d{1,2}:\d{2}:\d{2}(\-|\+)\d+(:\d+)?(:\d+)?+/
         DateTime.strptime(date, '%Y-%m-%d %H:%M:%S%z')
       else
-        raise "Unknown date format"
+        raise "Unknown date format: #{date}"
       end
     end
 
