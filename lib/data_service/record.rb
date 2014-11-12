@@ -7,7 +7,7 @@ module DataService
       @uid = SecureRandom.hex(16)
       @date = parse_date(date)
 
-      @id = @date.strftime('%Y-%m-%dT%H:%M:%S')
+      @id = @date.to_time.utc.strftime('%Y-%m-%dT%H:%M:%S')
       @reading = value
       @datetime = @date.strftime('%a %b %e %H:%M:%S %:z %Y')
       @extra = extra
