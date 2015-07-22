@@ -13,11 +13,11 @@ Install Ruby, preferably Ruby 2.1.4 or newer. Then use the `verify` tool to chec
     Columns: 9
             Column 1: TIMESTAMP
                     units: TS
-                    stats: 
+                    stats:
                     readings: 0
             Column 2: RECORD
                     units: RN
-                    stats: 
+                    stats:
                     readings: 8286
                     Example: 2012-08-04 17:10 0
     ...
@@ -42,4 +42,8 @@ I will update this README when that support is added.
 
 ## License
 
-All rights reserved, GeoSensorWeb Lab.
+MIT License
+
+## Author
+
+James Badger <jpbadger@ucalgary.ca>
